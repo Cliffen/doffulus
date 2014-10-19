@@ -90,9 +90,10 @@ public class AxisRestrict : MonoBehaviour {
 		// Set position to altered one
 		target.transform.position = newPos;
 
-		// If still bound, don't rotate
+		// If still bound, don't rotate or add velocity
 		if ( bound ) {
 			target.transform.rotation = origRot;
+			target.rigidbody.velocity = new Vector3( 0.0f, 0.0f, 0.0f );
 		}
 	}
 
