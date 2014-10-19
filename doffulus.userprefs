@@ -1,0 +1,31 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/OVR/Scripts/OVRMainMenu.cs">
+    <Files>
+      <File FileName="Assets/LeapMotion/Scripts/Hands/HandModel.cs" Line="12" Column="1" />
+      <File FileName="Assets/OVR/Scripts/OVRMainMenu.cs" Line="902" Column="53" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="LeapMotion" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Hands" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="OVR" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="OVRMainMenu.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
