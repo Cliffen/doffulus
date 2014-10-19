@@ -6,3 +6,7 @@ Assets/OVR
 Assets/Plugins
 Assets/Tuscany
 *.meta
+*.app
+*.sln
+*.csproj
+*.unityproj
