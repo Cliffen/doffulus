@@ -46,7 +46,11 @@ public class FixCam : MonoBehaviour {
 	// Set camera to given position index and return true if index exists
 	public bool setPosition( int position ) {
 		if ( positions.Count > position ) {
-			transform.position = positions[ position ];
+			if ( animate ) {
+				iTween.MoveTo( gameObject, positions[ position ], 3.0f );
+			} else {
+				transform.position = positions[ position ];
+			}
 			return true;
 		}
 		return false;
