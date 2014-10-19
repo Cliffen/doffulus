@@ -32,12 +32,13 @@ public class AxisRestrict : MonoBehaviour {
 	void Update() {
 		Vector3 newPos = target.transform.position;
 		// On 'R' reset objects
-		if ( Input.GetKeyDown( "r" ) ) {
+		if ( Input.GetKeyDown( "p" ) ) {
 			bound = false;
 			freed = false;
 			target.rigidbody.useGravity = false;
 			target.transform.position = origPos;
 			target.transform.rotation = origRot;
+			target.rigidbody.velocity = new Vector3( 0.0f, 0.0f, 0.0f );
 			return;
 		}
 

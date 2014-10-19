@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class TrashIt : MonoBehaviour {
 
 	// Amount of time an object must stay before being trashed
-	public uint trashTimeout = 100;
+	public int trashTimeout = 10;
+	public ParticleSystem stinky = null;
 
 	protected Dictionary<string, int> contentNames = new Dictionary<string, int>();
 	protected uint noTrashed = 0;
@@ -21,7 +22,10 @@ public class TrashIt : MonoBehaviour {
 	}
 
 	void OnTriggerEnter( Collider other ) {
-		contentNames.Add( other.name, 0 );
+		string id = other.name;
+		if ( !contentNames.ContainsKey( id ) ) {
+			contentNames.Add( id, 0 );
+		}
 	}
 
 	void OnTriggerStay( Collider other ) {
@@ -32,14 +36,14 @@ public class TrashIt : MonoBehaviour {
 				Destroy( other.gameObject, 2.0f );
 				contentNames.Remove( id );
 				noTrashed++;
-				if ( gameObject.GetComponent<ParticleSystem>() )
-					gameObject.GetComponent<ParticleSystem>().Play();
+				if ( stinky ) {
+					stinky.Play();
+				}
+
+				return;
 			}
 			// Increment objects counter
-			contentNames[ id ] = contentNames[ id ]++;
-		} else {
-			// If not in dict, add
-			contentNames.Add( id, 0 );
+			contentNames[ id ] = contentNames[ id ] + 1;
 		}
 	}
 }
