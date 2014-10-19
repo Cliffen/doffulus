@@ -5,7 +5,18 @@ A basic proof of concept instructional VR experience outlining how to doff Biolo
 
 ### Prospective features:
 
-Interactive simulation of:
-* Disinfecting hands and arms with bleach wipes
-* Removing gloves
-* Removing hood
+Interactive simulation of doffing partner:
+* Disinfecting tubes
+* Roll up hood
+* Step through suit removal
+* Remove gloves
+
+Gamified elements include:
+* Avoiding touching clean areas
+* Disposing of waste properly
+* Wiping off potentially infected areas
+
+Mechanics:
+* Wiping surfaces
+* Moving objects
+* Advancing steps in process
