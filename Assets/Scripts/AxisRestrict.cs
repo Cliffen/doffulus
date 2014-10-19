@@ -22,7 +22,6 @@ public class AxisRestrict : MonoBehaviour {
 		restrictX = ( restrictDir.x != 0.0 ) ? false : true;
 		restrictY = ( restrictDir.y != 0.0 ) ? false : true;
 		restrictZ = ( restrictDir.z != 0.0 ) ? false : true;
-		Debug.Log(restrictY);
 
 		// Store starting position and rotation
 		origPos = target.transform.position;
@@ -32,6 +31,23 @@ public class AxisRestrict : MonoBehaviour {
 	// If bound, only move along unrestrcited axis
 	void Update() {
 		Vector3 newPos = target.transform.position;
+		// On 'R' reset objects
+		if ( Input.GetKeyDown( "r" ) ) {
+			bound = false;
+			freed = false;
+			target.rigidbody.useGravity = false;
+			target.transform.position = origPos;
+			target.transform.rotation = origRot;
+			return;
+		}
+
+		// If unbound and ungrabbed, add gravity
+		if ( freed ) {
+			((GrabbableObject)gameObject.GetComponentInChildren( typeof(GrabbableObject) )).AddGravity();
+		}
+
+		// Restrict motion along each axis if set
+		// =======================================
 		// X axis is restricted and target is still inside of collider bounds
 		if ( restrictX && bound ) {
 			newPos.x = origPos.x;
@@ -71,8 +87,10 @@ public class AxisRestrict : MonoBehaviour {
 				newPos.z = origPos.z;
 			}
 		}
+		// Set position to altered one
 		target.transform.position = newPos;
 
+		// If still bound, don't rotate
 		if ( bound ) {
 			target.transform.rotation = origRot;
 		}
@@ -94,7 +112,6 @@ public class AxisRestrict : MonoBehaviour {
 		if ( other == target.collider && !freed ) {
 			bound = false;
 			freed = true;
-			((Rigidbody)other.GetComponentInParent( typeof(Rigidbody) )).useGravity = true;
 		}
 	}
 }
