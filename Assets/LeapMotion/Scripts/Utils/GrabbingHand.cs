@@ -95,6 +95,7 @@ public class GrabbingHand : MonoBehaviour {
         }
       }
     }
+
     return closest;
   }
 
@@ -173,7 +174,7 @@ public class GrabbingHand : MonoBehaviour {
         Quaternion axis_correction = Quaternion.FromToRotation(axis_in_palm, palm_vector);
         if (Vector3.Dot(axis_in_palm, palm_vector) < 0)
           axis_correction = Quaternion.FromToRotation(axis_in_palm, -palm_vector);
-
+          
         rotation_from_palm_ = axis_correction * rotation_from_palm_;
       }
     }
@@ -231,7 +232,7 @@ public class GrabbingHand : MonoBehaviour {
 
   protected void UpdatePinchPosition() {
     HandModel hand_model = GetComponent<HandModel>();
-    current_pinch_position_ = 0.5f * (hand_model.fingers[0].GetTipPosition() +
+    current_pinch_position_ = 0.5f * (hand_model.fingers[0].GetTipPosition() + 
                                       hand_model.fingers[1].GetTipPosition());
 
     Vector3 delta_pinch = current_pinch_position_ - filtered_pinch_position_;
