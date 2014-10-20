@@ -26,24 +26,37 @@ public class TrashIt : MonoBehaviour {
 		if ( !contentNames.ContainsKey( id ) ) {
 			contentNames.Add( id, 0 );
 		}
+
+		AxisRestrict target = other.gameObject.GetComponentInParent<AxisRestrict>();
+		if ( target != null ) {
+			target.setInTrash( true );
+		}
 	}
 
 	void OnTriggerStay( Collider other ) {
 		string id = other.name;
 		if ( contentNames.ContainsKey( id ) ) {
+			// If halfway through timeout, show particles
+			if ( stinky && contentNames[ id ] > trashTimeout/2 ) {
+				stinky.Play();
+			}
 			// If timeout period passed, trash item
 			if ( contentNames[ id ] > trashTimeout ) {
-				Destroy( other.gameObject, 2.0f );
+				other.gameObject.SetActive(false);
 				contentNames.Remove( id );
 				noTrashed++;
-				if ( stinky ) {
-					stinky.Play();
-				}
 
 				return;
 			}
 			// Increment objects counter
 			contentNames[ id ] = contentNames[ id ] + 1;
+		}
+	}
+
+	void OnTriggerExit( Collider other ) {
+		AxisRestrict target = other.gameObject.GetComponentInParent<AxisRestrict>();
+		if ( target != null ) {
+			target.setInTrash( false );
 		}
 	}
 }

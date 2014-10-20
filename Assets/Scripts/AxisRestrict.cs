@@ -16,6 +16,8 @@ public class AxisRestrict : MonoBehaviour {
 	protected Quaternion origRot = new Quaternion( 0.0f, 0.0f, 0.0f, 0.0f );
 	protected bool bound = false;
 	protected bool freed = false;
+	[HideInInspector]
+	public bool inTrash = false;
 
 	void Start () {
 		// translate restrict vector into basic bools for quick logic
@@ -33,18 +35,16 @@ public class AxisRestrict : MonoBehaviour {
 		Vector3 newPos = target.transform.position;
 		// On 'R' reset objects
 		if ( Input.GetKeyDown( "p" ) ) {
-			bound = false;
-			freed = false;
-			target.rigidbody.useGravity = false;
-			target.transform.position = origPos;
-			target.transform.rotation = origRot;
-			target.rigidbody.velocity = new Vector3( 0.0f, 0.0f, 0.0f );
+			resetObject();
 			return;
 		}
 
 		// If unbound and ungrabbed, add gravity
-		if ( freed ) {
-			((GrabbableObject)gameObject.GetComponentInChildren( typeof(GrabbableObject) )).AddGravity();
+		GrabbableObject grabbee = gameObject.GetComponentInChildren<GrabbableObject>();
+		if ( freed && grabbee != null ) {
+			if ( !grabbee.IsGrabbed() ) {
+				grabbee.rigidbody.useGravity = true;
+			}
 		}
 
 		// Restrict motion along each axis if set
@@ -115,5 +115,22 @@ public class AxisRestrict : MonoBehaviour {
 			bound = false;
 			freed = true;
 		}
+	}
+
+	public void setInTrash( bool state ) {
+		inTrash = state;
+	}
+
+	public bool isInTrsah() {
+		return inTrash;
+	}
+
+	public void resetObject() {
+		bound = false;
+		freed = false;
+		target.rigidbody.useGravity = false;
+		target.transform.position = origPos;
+		target.transform.rotation = origRot;
+		target.rigidbody.velocity = new Vector3( 0.0f, 0.0f, 0.0f );
 	}
 }

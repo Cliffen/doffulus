@@ -63,10 +63,4 @@ public class GrabbableObject : MonoBehaviour {
       }
     }
   }
-
-  public void AddGravity() {
-    if ( !grabbed_ ) {
-      gameObject.rigidbody.useGravity = true;
-    }
-  }
 }
